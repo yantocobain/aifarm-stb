@@ -1,0 +1,19 @@
+{
+"cmd":11,
+"buffId":"0023FD",
+"panel":[1,5,0,43,2,0,0],
+"brand":["HAFLA 32","Jadwal Waktu Sholat","Ver2.89","32RGB-1rev5"],
+"lisensi":["","","020",4],
+"ssid":"",
+"pass":"",
+"display":[1,0,23,0,1,0,1,0,3,2,0],
+"waktu":[12,34,0],
+"timerA":[0,1,2,0],
+"timerB":[0,3,4,0],
+"TimA":["Indonesia","Rudi",0,0,0,1,0,1,0,1],
+"TimB":["Malaysia","jonshon",2,4,1,0,1,0,1,0],
+  "pesan":[
+[0,3,0,1,"INI ADALAH CONTOH INFOR 1"],
+[0,3,0,1,"INI ADALAH CONTOH INFOR 2"]
+  ]
+}
