@@ -45,7 +45,73 @@
 		</div>
 	</div>
 </body>
-<script src="js/proses.js"></script>
+<script>
+var url = document.URL.split('/').slice(0, -1).join('/');
+readTextFileToJSON(url+"/url.json");
+
+function startTimeA(url3) {
+	console.log("startTimeA",url3);
+	var jsonData = getJSON(url3);
+	var objData = JSON.parse(jsonData);
+	console.log("objData startTimeA",jsonData);
+
+	if (objData.status == 0) {
+		prosesnya = "ON";
+		document.getElementById("indikator").style.backgroundColor = "green";
+	} else if (objData.status == 1) {
+		prosesnya = "ON";
+		document.getElementById("indikator").style.backgroundColor = "yellow";
+	} else if (objData.status == 2) {
+		prosesnya = "ON";
+		document.getElementById("indikator").style.backgroundColor = "red";
+	} else if (objData.status == 3) {
+		prosesnya = "ON";
+		document.getElementById("indikator").style.backgroundColor = "blue";
+	} else if (objData.status == 4) {
+		prosesnya = "Clean Up";
+		document.getElementById("indikator").style.backgroundColor = "grey";
+		document.getElementById("latar").style.backgroundColor = "green";
+	}
+
+	document.getElementById("proses").innerHTML = prosesnya;
+
+	timerA = setTimeout(function () {
+		startTimeA(url3);
+	}, 500);
+}
+
+
+function readTextFileToJSON(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                console.log(allText);
+				try {
+					let jsons = JSON.parse(allText);
+					console.log("jsons=",jsons);
+					console.log("jsons.url1=",jsons.url1);
+					console.log("jsons.url2=",jsons.url2);
+					console.log("jsons.url3=",jsons.url3);
+					startTimeA(jsons.url3);
+				} catch (e) {
+					console.log("terjadi kesalahan sistem \n",e);
+				}
+            }
+			else {
+				alert("file pengaturan tidak ditemukan");
+			}
+        }
+    }
+    rawFile.send(null);
+}
+</script>
 <script>
 	window.setTimeout( function() {
 	window.location.reload();
