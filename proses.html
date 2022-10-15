@@ -22,7 +22,7 @@
 					<h2>Water Heater</h2>
 					<br>
 					<br>
-					<img src="assets/image/Water.png" alt="image" width="60%" height="50%" />
+					<img src="assets/image/Water.png" alt="image" width="50%" height="50%" />
 					<h3 id="proses">ON</h3>
 					<div id="indikator" class="bulb"></div>
 				</div>
@@ -30,14 +30,14 @@
 					<h2>Tabung IoT</h2>
 					<br>
 					<br>
-					<img src="assets/image/tubes.png" alt="image" width="60%" height="50%" />
+					<img src="assets/image/tubes.png" alt="image" width="50%" height="50%" />
 					<h3 id="proses">Clean Up</h3>
 					<div id="indikator" class="bulb"></div>
 				</div>
 				<div id="latar" class="led-box2">
 					<h2>Jalur ke Tabung Master</h2>
 					<br>
-					<img src="assets/image/pipe.png" alt="image" width="60%" height="50%" />
+					<img src="assets/image/pipe.png" alt="image" width="50%" height="50%" />
 					<h3 id="proses">Clean Up</h3>
 					<div id="indikator" class="bulb"></div>
 				</div>
@@ -58,18 +58,11 @@ function startTimeA(url3) {
 	if (objData.status == 0) {
 		prosesnya = "ON";
 		document.getElementById("indikator").style.backgroundColor = "green";
-	} else if (objData.status == 1) {
-		prosesnya = "ON";
-		document.getElementById("indikator").style.backgroundColor = "yellow";
-	} else if (objData.status == 2) {
-		prosesnya = "ON";
-		document.getElementById("indikator").style.backgroundColor = "red";
-	} else if (objData.status == 3) {
-		prosesnya = "ON";
-		document.getElementById("indikator").style.backgroundColor = "blue";
-	} else if (objData.status == 4) {
+		window.location = "http://localhost/aifarm/index.html";
+	}
+	 else if(objData.status == 1) {
 		prosesnya = "Clean Up";
-		document.getElementById("indikator").style.backgroundColor = "grey";
+		document.getElementById("indikator").style.backgroundColor = "blue";
 		document.getElementById("latar").style.backgroundColor = "green";
 	}
 

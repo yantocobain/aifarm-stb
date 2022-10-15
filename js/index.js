@@ -8,19 +8,19 @@ function startTimeA() {
 
 	if (objData.status == 0) {
 		statusnya = "StandBy";
-		document.getElementById("indikator").style.backgroundColor = "green";
+		document.getElementById("hasil").style.backgroundColor = "green";
 	} else if (objData.status == 1) {
 		statusnya = "Terima Request";
-		document.getElementById("indikator").style.backgroundColor = "yellow";
+		document.getElementById("hasil").style.backgroundColor = "yellow";
 	} else if (objData.status == 2) {
 		statusnya = "Proses Perah";
-		document.getElementById("indikator").style.backgroundColor = "red";
+		document.getElementById("hasil").style.backgroundColor = "red";
 	} else if (objData.status == 3) {
 		statusnya = "Kirim Data";
-		document.getElementById("indikator").style.backgroundColor = "blue";
+		document.getElementById("hasil").style.backgroundColor = "blue";
 	} else if (objData.status == 4) {
 		statusnya = "Valve Terbuka";
-		document.getElementById("indikator").style.backgroundColor = "purple";
+		document.getElementById("hasil").style.backgroundColor = "purple";
 	}
 
 	document.getElementById("runningtext1").innerHTML = objData["iot_name"];
@@ -43,19 +43,19 @@ function startTimeB() {
 
 	if (objData.status == 0) {
 		statusnya = "StandBy";
-		document.getElementById("indikatorB").style.backgroundColor = "green";
+		document.getElementById("hasilB").style.backgroundColor = "green";
 	} else if (objData.status == 1) {
 		statusnya = "Terima Request";
-		document.getElementById("indikatorB").style.backgroundColor = "yellow";
+		document.getElementById("hasilB").style.backgroundColor = "yellow";
 	} else if (objData.status == 2) {
 		statusnya = "Proses Perah";
-		document.getElementById("indikatorB").style.backgroundColor = "red";
+		document.getElementById("hasilB").style.backgroundColor = "red";
 	} else if (objData.status == 3) {
 		statusnya = "Kirim Data";
-		document.getElementById("indikatorB").style.backgroundColor = "blue";
+		document.getElementById("hasilB").style.backgroundColor = "blue";
 	} else if (objData.status == 4) {
 		statusnya = "Valve Terbuka";
-		document.getElementById("indikatorB").style.backgroundColor = "purple";
+		document.getElementById("hasilB").style.backgroundColor = "purple";
 	}
 
 	document.getElementById("runningtextB").innerHTML = objData["iot_name"];

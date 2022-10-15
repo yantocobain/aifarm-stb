@@ -19,19 +19,19 @@
 			<div class="column" style="background-color: rgb(231, 231, 231)">
 				<h1 class="grad1">Status IoT</h1>
 				<div class="led-box">
-					<h2 id="runningtext1">Tidak Ada Data</h2>
-					<h1 id="skill">0 ml</h1>
-					<h3 id="hasil">StandBy</h3>
-					<div id="indikator" class="bulb"></div>
-					<h3>Jenis Kambing :</h3>
+					<h1 id="runningtext1">Tidak Ada Data</h1>
+					<h1 id="skill" style="font-size: 100px;">0 ml</h1>
+					<h1 id="hasil" style="font-size: 50px;">Tidak Ada Status</h1>
+					<!-- <div id="indikator" class="bulb"></div> -->
+					<h2 style="font-size: 30px;">Jenis Kambing :</h2>
 					<h1 id="Kambing" style="color:blue">gembel</h1>
 				</div>
 				<div class="led-box">
-					<h2 id="runningtextB">Tidak Ada Data</h2>
-					<h1 id="skillB">0 ml</h1>
-					<h3 id="hasilB">StandBy</h3>
-					<div id="indikatorB" class="bulb"></div>
-					<h3>Jenis Kambing :</h3>
+					<h1 id="runningtextB">Tidak Ada Data</h1>
+					<h1 id="skillB" style="font-size: 100px;">0 ml</h1>
+					<h1 id="hasilB" style="font-size: 50px;">Tidak Ada Status</h1>
+					<!-- <div id="indikatorB" class="bulb"></div> -->
+					<h2>Jenis Kambing :</h2>
 					<h1 id="KambingB" style="color:blue">gembel</h1>
 				</div>
 			</div>
@@ -39,7 +39,64 @@
 	</div>
 </body>
 <script src="js/jws.js"></script>
-<script src="js/aifarm.js"></script>
+<script src="js/index.js"></script>
+<script>
+	var url = document.URL.split('/').slice(0, -1).join('/');
+	readTextFileToJSON(url+"/url.json");
+	
+	function startTime(url3) {
+		console.log("startTime",url3);
+		var jsonData = getJSON(url3);
+		var objData = JSON.parse(jsonData);
+		console.log("objData startTime",jsonData);
+	
+		if (objData.status == 0) {
+			// prosesnya = "ON";
+			// document.getElementById("indikator").style.backgroundColor = "green";
+		}
+		 else if(objData.status == 1) {
+			window.location = "http://localhost/aifarm/proses.html";
+		}
+	
+		// document.getElementById("proses").innerHTML = prosesnya;
+	
+		timerA = setTimeout(function () {
+			startTime(url3);
+		}, 500);
+	}
+	
+	
+	function readTextFileToJSON(file)
+	{
+		var rawFile = new XMLHttpRequest();
+		rawFile.open("GET", file, false);
+		rawFile.onreadystatechange = function ()
+		{
+			if(rawFile.readyState === 4)
+			{
+				if(rawFile.status === 200 || rawFile.status == 0)
+				{
+					var allText = rawFile.responseText;
+					console.log(allText);
+					try {
+						let jsons = JSON.parse(allText);
+						console.log("jsons=",jsons);
+						console.log("jsons.url1=",jsons.url1);
+						console.log("jsons.url2=",jsons.url2);
+						console.log("jsons.url3=",jsons.url3);
+						startTime(jsons.url3);
+					} catch (e) {
+						console.log("terjadi kesalahan sistem \n",e);
+					}
+				}
+				else {
+					alert("file pengaturan tidak ditemukan");
+				}
+			}
+		}
+		rawFile.send(null);
+	}
+	</script>
 <script>
 	window.setTimeout( function() {
 	window.location.reload();

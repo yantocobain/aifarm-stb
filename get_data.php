@@ -1,3 +1,3 @@
 <?php
-    echo '{"volume":10, "status":"1"}';
+    echo '{"proses":10, "status":"0"}';
 ?>
