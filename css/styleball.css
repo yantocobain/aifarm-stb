@@ -11,7 +11,7 @@ html {
 .header img {
 	float: right;
 	width: auto;
-	height: 100px;
+	height: 190px;
 	background: rgb(255, 255, 255);
 }
 
@@ -26,7 +26,7 @@ h1 {
 	font-size: 60px;
   }
   h2 {
-	font-size: 30px;
+	font-size: 25px;
   }
   
 .h3 {
@@ -128,7 +128,7 @@ h1 {
 
 .led-box {
 	height: 75%;
-	width: 45.5%;
+	width: 47.5%;
 	margin: 15px;
 	float: left;
 	border: 5px solid rgb(0, 128, 128);
