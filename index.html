@@ -13,7 +13,7 @@
 	<div class="pointcontainer">
 		<div class="header">
 			<img src="assets/logo/Logo.png" alt="logo"/>
-			<h1 class="grad2" style="font-size: 70px;">PETERNAKAN ELFARM</h1>
+			<h1 class="grad2" style="font-size: 70px;" id="nama_peternakan">PETERNAKAN AIFARM</h1>
 		</div>
 		<div class="container">
 			<div class="column" style="background-color: rgb(231, 231, 231)">
@@ -39,14 +39,13 @@
 	</div>
 </body>
 <script src="js/jws.js"></script>
-<script src="js/index.js"></script>
 <script>
 	var url = document.URL.split('/').slice(0, -1).join('/');
-	readTextFileToJSON(url+"/url.json");
+	readTextFileToJSON(url+"/setting.json");
 	
-	function startTime(url3) {
-		console.log("startTime",url3);
-		var jsonData = getJSON(url3);
+	function startTime(url) {
+		console.log("startTime",url);
+		var jsonData = getJSON(url);
 		var objData = JSON.parse(jsonData);
 		console.log("objData startTime",jsonData);
 	
@@ -54,14 +53,14 @@
 			// prosesnya = "ON";
 			// document.getElementById("indikator").style.backgroundColor = "green";
 		}
-		 else if(objData.status == 1) {
-			window.location = "http://localhost/aifarm/proses.html";
+		else if(objData.status == 1) {
+			window.location = "proses.html";
 		}
 	
 		// document.getElementById("proses").innerHTML = prosesnya;
 	
 		timerA = setTimeout(function () {
-			startTime(url3);
+			startTime(url);
 		}, 500);
 	}
 	
@@ -84,7 +83,11 @@
 						console.log("jsons.url1=",jsons.url1);
 						console.log("jsons.url2=",jsons.url2);
 						console.log("jsons.url3=",jsons.url3);
-						startTime(jsons.url3);
+						console.log("jsons.nama_peternakan=",jsons.nama_peternakan);
+						document.getElementById("nama_peternakan").innerHTML = jsons.nama_peternakan ?? "PETERNAKAN AIFARM";
+						startTime(jsons.url1);
+						startTimeA(jsons.url2);
+						startTimeB(jsons.url3);
 					} catch (e) {
 						console.log("terjadi kesalahan sistem \n",e);
 					}
@@ -96,11 +99,88 @@
 		}
 		rawFile.send(null);
 	}
+
+
+	function startTimeA(url) {
+	var jsonData = getJSON(url);
+	var objData = JSON.parse(jsonData);
+	console.log(jsonData);
+
+	var elem = document.getElementById("skill");
+	elem.innerHTML = objData["volume"] + " ml";
+
+	if (objData.status == 0) {
+		statusnya = "StandBy";
+		document.getElementById("hasil").style.backgroundColor = "green";
+	} else if (objData.status == 1) {
+		statusnya = "Terima Request";
+		document.getElementById("hasil").style.backgroundColor = "yellow";
+	} else if (objData.status == 2) {
+		statusnya = "Proses Perah";
+		document.getElementById("hasil").style.backgroundColor = "red";
+	} else if (objData.status == 3) {
+		statusnya = "Kirim Data";
+		document.getElementById("hasil").style.backgroundColor = "blue";
+	} else if (objData.status == 4) {
+		statusnya = "Valve Terbuka";
+		document.getElementById("hasil").style.backgroundColor = "purple";
+	}
+
+	document.getElementById("runningtext1").innerHTML = objData["iot_name"];
+	document.getElementById("hasil").innerHTML = statusnya;
+	document.getElementById("Kambing").innerHTML = objData["jenis"];
+
+	timerA = setTimeout(function () {
+		startTimeA(url);
+	}, 500);
+}
+
+
+function startTimeB(url) {
+	var jsonData = getJSON(url);
+	var objData = JSON.parse(jsonData);
+	console.log(jsonData);
+
+	var elem = document.getElementById("skillB");
+	elem.innerHTML = objData["volume"] + " ml";
+
+	if (objData.status == 0) {
+		statusnya = "StandBy";
+		document.getElementById("hasilB").style.backgroundColor = "green";
+	} else if (objData.status == 1) {
+		statusnya = "Terima Request";
+		document.getElementById("hasilB").style.backgroundColor = "yellow";
+	} else if (objData.status == 2) {
+		statusnya = "Proses Perah";
+		document.getElementById("hasilB").style.backgroundColor = "red";
+	} else if (objData.status == 3) {
+		statusnya = "Kirim Data";
+		document.getElementById("hasilB").style.backgroundColor = "blue";
+	} else if (objData.status == 4) {
+		statusnya = "Valve Terbuka";
+		document.getElementById("hasilB").style.backgroundColor = "purple";
+	}
+
+	document.getElementById("runningtextB").innerHTML = objData["iot_name"];
+	document.getElementById("hasilB").innerHTML = statusnya;
+	document.getElementById("KambingB").innerHTML = objData["jenis"];
+
+	timerA = setTimeout(function () {
+		startTimeB(url);
+	}, 500);
+}
+
+
+
+
+
 	</script>
+
+
 <script>
 	window.setTimeout( function() {
 	window.location.reload();
-  }, 30000);
+}, 30000);
 </script>
 
 </html>

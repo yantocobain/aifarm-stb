@@ -18,28 +18,28 @@
 		<div class="container">
 			<div class="column" style="background-color: rgb(231, 231, 231)">
 				<h1 class="grad1">Proses Clean Up</h1>
-				<div id="latar" class="led-box2">
+				<div id="latar1" class="led-box2">
 					<h2>Water Heater</h2>
 					<br>
 					<br>
 					<img src="assets/image/Water.png" alt="image" width="50%" height="50%" />
 					<h3 id="proses">ON</h3>
-					<div id="indikator" class="bulb"></div>
+					<div id="indikator1" class="bulb"></div>
 				</div>
-				<div id="latar" class="led-box2">
+				<div id="latar2" class="led-box2">
 					<h2>Tabung IoT</h2>
 					<br>
 					<br>
 					<img src="assets/image/tubes.png" alt="image" width="50%" height="50%" />
 					<h3 id="proses">Clean Up</h3>
-					<div id="indikator" class="bulb"></div>
+					<div id="indikator2" class="bulb"></div>
 				</div>
-				<div id="latar" class="led-box2">
+				<div id="latar3" class="led-box2">
 					<h2>Jalur ke Tabung Master</h2>
 					<br>
 					<img src="assets/image/pipe.png" alt="image" width="50%" height="50%" />
 					<h3 id="proses">Clean Up</h3>
-					<div id="indikator" class="bulb"></div>
+					<div id="indikator3" class="bulb"></div>
 				</div>
 			</div>
 		</div>
@@ -47,32 +47,51 @@
 </body>
 <script>
 var url = document.URL.split('/').slice(0, -1).join('/');
-readTextFileToJSON(url+"/url.json");
+readTextFileToJSON(url+"/setting.json");
 
-function startTimeA(url3) {
-	console.log("startTimeA",url3);
-	var jsonData = getJSON(url3);
+function startTime(url) {
+	console.log("startTime",url);
+	var jsonData = getJSON(url);
 	var objData = JSON.parse(jsonData);
-	console.log("objData startTimeA",jsonData);
+	console.log("objData startTime",jsonData);
 
 	if (objData.status == 0) {
-		prosesnya = "ON";
-		document.getElementById("indikator").style.backgroundColor = "green";
-		window.location = "http://localhost/aifarm/index.html";
+		window.location = "index.html";
+
 	}
-	 else if(objData.status == 1) {
+	resetColor();
+	if (objData.proses == 1) {
+		prosesnya = "ON";
+		document.getElementById("indikator1").style.backgroundColor = "blue";
+		document.getElementById("latar1").style.backgroundColor = "green";
+
+	}
+	 else if(objData.proses == 2) {
 		prosesnya = "Clean Up";
-		document.getElementById("indikator").style.backgroundColor = "blue";
-		document.getElementById("latar").style.backgroundColor = "green";
+		document.getElementById("indikator2").style.backgroundColor = "blue";
+		document.getElementById("latar2").style.backgroundColor = "green";
+	}
+	else if(objData.proses == 3) {
+		prosesnya = "Jalur ke Tabung Master";
+		document.getElementById("indikator3").style.backgroundColor = "blue";
+		document.getElementById("latar3").style.backgroundColor = "green";
 	}
 
 	document.getElementById("proses").innerHTML = prosesnya;
 
 	timerA = setTimeout(function () {
-		startTimeA(url3);
+		startTime(url);
 	}, 500);
 }
 
+function resetColor() {
+	document.getElementById("indikator1").style.backgroundColor = "grey";
+	document.getElementById("indikator2").style.backgroundColor = "grey";
+	document.getElementById("indikator3").style.backgroundColor = "grey";
+	document.getElementById("latar1").style.backgroundColor = "white";
+	document.getElementById("latar2").style.backgroundColor = "white";
+	document.getElementById("latar3").style.backgroundColor = "white";
+}
 
 function readTextFileToJSON(file)
 {
@@ -92,7 +111,9 @@ function readTextFileToJSON(file)
 					console.log("jsons.url1=",jsons.url1);
 					console.log("jsons.url2=",jsons.url2);
 					console.log("jsons.url3=",jsons.url3);
-					startTimeA(jsons.url3);
+					startTime(jsons.url1);
+					document.getElementById("nama_peternakan").innerHTML = jsons.nama_peternakan ?? "PETERNAKAN AIFARM";
+
 				} catch (e) {
 					console.log("terjadi kesalahan sistem \n",e);
 				}

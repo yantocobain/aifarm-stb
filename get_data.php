@@ -1,3 +1,3 @@
 <?php
-    echo '{"proses":10, "status":"0"}';
+    echo '{"proses":2, "status":"1"}';
 ?>
